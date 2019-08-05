@@ -55,7 +55,7 @@ const imageInlineSizeLimit = parseInt(
 const useTypeScript = fs.existsSync(paths.appTsConfig);
 
 // style files regexes
-const cssRegex = /\.css$/;
+const cssRegex = /\.(css|less)$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
@@ -320,7 +320,7 @@ module.exports = function(webpackEnv) {
 
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
-        {
+        /*{
           test: /\.(js|mjs|jsx|ts|tsx)$/,
           enforce: 'pre',
           use: [
@@ -362,7 +362,7 @@ module.exports = function(webpackEnv) {
             },
           ],
           include: paths.appSrc,
-        },
+        },*/
         {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall
@@ -404,6 +404,7 @@ module.exports = function(webpackEnv) {
                     : isEnvDevelopment && 'development',
                   [
                     'babel-plugin-named-asset-import',
+                    'babel-plugin-jsx-control-statements',
                     'babel-preset-react-app',
                     'react-dev-utils',
                     'react-scripts',
@@ -411,6 +412,7 @@ module.exports = function(webpackEnv) {
                 ),
                 // @remove-on-eject-end
                 plugins: [
+                  require.resolve('babel-plugin-jsx-control-statements'),
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
@@ -479,10 +481,13 @@ module.exports = function(webpackEnv) {
             {
               test: cssRegex,
               exclude: cssModuleRegex,
-              use: getStyleLoaders({
-                importLoaders: 1,
-                sourceMap: isEnvProduction && shouldUseSourceMap,
-              }),
+              use: getStyleLoaders(
+                {
+                  importLoaders: 1,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                },
+                'less-loader'
+              ),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
               // Remove this when webpack adds a warning or an error for this.

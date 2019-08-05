@@ -16,6 +16,11 @@ const paths = require('./paths');
 delete require.cache[require.resolve('./paths')];
 
 const NODE_ENV = process.env.NODE_ENV;
+let PROD_TYPE = 'production';
+
+const argv = process.argv.slice(2);
+if (argv.indexOf('--staging') !== -1) PROD_TYPE = 'staging';
+
 if (!NODE_ENV) {
   throw new Error(
     'The NODE_ENV environment variable is required but was not specified.'
@@ -77,6 +82,7 @@ function getClientEnvironment(publicUrl) {
         return env;
       },
       {
+        PROD_TYPE,
         // Useful for determining whether we’re running in production mode.
         // Most importantly, it switches React into the correct mode.
         NODE_ENV: process.env.NODE_ENV || 'development',
