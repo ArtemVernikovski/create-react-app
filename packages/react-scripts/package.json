@@ -1,10 +1,10 @@
 {
-  "name": "react-scripts",
+  "name": "@vernik/react-scripts",
   "version": "3.0.1",
-  "description": "Configuration and scripts for Create React App.",
+  "description": "@Vernik Configuration and scripts for Create React App.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/create-react-app.git",
+    "url": "https://github.com/ArtemVernikovski/create-react-app.git",
     "directory": "packages/react-scripts"
   },
   "license": "MIT",
@@ -85,6 +85,7 @@
     "workbox-webpack-plugin": "4.2.0"
   },
   "devDependencies": {
+    "minimist": "^1.2.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },
