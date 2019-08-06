@@ -75,8 +75,8 @@ const resolveModule = (resolveFn, filePath) => {
   return resolveFn(`${filePath}.js`);
 };
 
-let appHtml = checkFileExists('/htmlTemplates/index.html')
-  ? '/htmlTemplates/index.html'
+let appHtml = checkFileExists('htmlTemplates/index.html')
+  ? 'htmlTemplates/index.html'
   : 'public/index.html';
 const extraHtml = `htmlTemplates/index.${parsedArgs.PROFILE}.html`;
 if (parsedArgs.PROFILE && checkFileExists(extraHtml)) {

@@ -1,7 +1,7 @@
 {
   "name": "@vernik/react-scripts",
-  "version": "3.0.1",
-  "description": "@Vernik Configuration and scripts for Create React App.",
+  "version": "3.0.2",
+  "description": "@vernik Configuration and scripts for Create React App.",
   "repository": {
     "type": "git",
     "url": "https://github.com/ArtemVernikovski/create-react-app.git",
