@@ -68,8 +68,6 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 // injected into the application via DefinePlugin in Webpack configuration.
 const REACT_APP = /^REACT_APP_/i;
 
-const parsedArgs = require('minimist')(process.argv.slice(2));
-
 function getClientEnvironment(publicUrl) {
   const raw = Object.keys(process.env)
     .filter(key => REACT_APP.test(key))
@@ -79,7 +77,6 @@ function getClientEnvironment(publicUrl) {
         return env;
       },
       {
-        profile: parsedArgs.profile || '',
         // Useful for determining whether we’re running in production mode.
         // Most importantly, it switches React into the correct mode.
         NODE_ENV: process.env.NODE_ENV || 'development',

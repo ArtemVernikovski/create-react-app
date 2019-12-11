@@ -11,8 +11,6 @@
 const path = require('path');
 const fs = require('fs');
 const url = require('url');
-const checkFileExists = require('../scripts/utils/checkFileExists');
-const parsedArgs = require('minimist')(process.argv.slice(2));
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
@@ -75,20 +73,13 @@ const resolveModule = (resolveFn, filePath) => {
   return resolveFn(`${filePath}.js`);
 };
 
-let appHtml = checkFileExists('htmlTemplates/index.html')
-  ? 'htmlTemplates/index.html'
-  : 'public/index.html';
-const extraHtml = `htmlTemplates/index.${parsedArgs.PROFILE}.html`;
-if (parsedArgs.PROFILE && checkFileExists(extraHtml)) {
-  appHtml = extraHtml;
-}
 // config after eject: we're in ./config/
 module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
-  appHtml,
+  appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
